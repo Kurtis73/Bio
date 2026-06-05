@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>생명과학개론 Chapter 21 예상 족보 정리</title>
+  <style>
+    :root{--bg:#f7f8fb;--card:#fff;--text:#18202f;--muted:#667085;--line:#e5e7eb;--accent:#2563eb;--accent2:#dbeafe;--good:#16a34a;--warn:#f59e0b;--bad:#dc2626;--shadow:0 10px 30px rgba(15,23,42,.08);}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.55} a{color:inherit;text-decoration:none}
+    header{position:sticky;top:0;z-index:5;background:rgba(247,248,251,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .bar{max-width:1180px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:14px;justify-content:space-between}.brand{font-weight:850;letter-spacing:-.03em}.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:7px 11px;background:white;color:var(--muted);font-size:13px}.wrap{max-width:1180px;margin:0 auto;padding:34px 22px 70px}.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:22px;align-items:stretch}.panel{background:var(--card);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:28px}.hero h1{font-size:44px;line-height:1.08;margin:0 0 12px;letter-spacing:-.055em}.hero p{margin:0;color:var(--muted);font-size:16px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}.stat{padding:16px;border:1px solid var(--line);border-radius:20px;background:#fafafa}.stat b{display:block;font-size:24px}.toolbar{margin:24px 0;display:flex;gap:10px;flex-wrap:wrap}.search{flex:1;min-width:230px;border:1px solid var(--line);border-radius:16px;padding:13px 15px;font-size:15px;background:#fff}.btn{border:1px solid var(--line);border-radius:16px;background:#fff;padding:12px 15px;font-weight:700;cursor:pointer}.btn.primary{background:var(--accent);color:white;border-color:var(--accent)}.grid{display:grid;grid-template-columns:260px 1fr;gap:22px}.side{position:sticky;top:78px;align-self:start}.nav{display:flex;flex-direction:column;gap:8px}.nav button{text-align:left;border:1px solid var(--line);background:white;border-radius:15px;padding:11px 13px;cursor:pointer;color:var(--muted)}.nav button.active{background:var(--accent2);color:var(--accent);border-color:#bfdbfe;font-weight:800}.section{margin-bottom:20px}.section h2{font-size:24px;letter-spacing:-.03em;margin:0 0 12px}.cards{display:grid;gap:12px}.term{border:1px solid var(--line);border-radius:20px;background:white;overflow:hidden}.term summary{cursor:pointer;list-style:none;padding:17px 18px;font-weight:800;display:flex;justify-content:space-between;gap:12px}.term summary::-webkit-details-marker{display:none}.term .body{border-top:1px solid var(--line);padding:15px 18px;color:var(--muted)}.tag{font-size:12px;color:var(--accent);background:var(--accent2);padding:4px 8px;border-radius:999px;white-space:nowrap}.quiz{counter-reset:q}.q{counter-increment:q;background:white;border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-bottom:10px}.q:before{content:"(" counter(q) ") ";font-weight:800}.blank{display:inline-block;min-width:120px;border-bottom:2px solid var(--text);height:22px;vertical-align:middle}.answer{display:none;margin-top:10px;color:var(--good);font-weight:800}.show .answer{display:block}.footer{margin-top:28px;color:var(--muted);font-size:13px}.hidden{display:none!important}@media(max-width:820px){.hero,.grid{grid-template-columns:1fr}.side{position:static}.hero h1{font-size:34px}.stats{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<header><div class="bar"><div class="brand">Bio Notes · Chapter 21</div><div class="pill">중간고사 족보형 단어 암기</div></div></header>
+<main class="wrap">
+  <section class="hero">
+    <div class="panel"><h1>동물의 구조와 기능<br>한 번에 정리</h1><p>정의 → 빈칸 → 핵심 단어 맞추기 형식으로 만든 생명과학개론 Chapter 21 예상 족보 사이트입니다. 검색, 단원 이동, 정답 표시 기능을 넣었습니다.</p><div class="stats"><div class="stat"><b>35</b><span>예상문제</span></div><div class="stat"><b>5</b><span>핵심 단원</span></div><div class="stat"><b>★</b><span>형광펜 중심</span></div></div></div>
+    <div class="panel"><h2 style="margin-top:0">시험 포인트</h2><p>Homeostasis, Negative feedback, Thermoregulation, Osmoregulation, Nephron 기능 4단계는 최우선 암기.</p><div class="toolbar"><button class="btn primary" onclick="showAnswers()">정답 모두 보기</button><button class="btn" onclick="hideAnswers()">정답 숨기기</button></div></div>
+  </section>
+
+  <div class="toolbar"><input id="search" class="search" placeholder="검색: homeostasis, nephron, 조직, 체온 조절..." oninput="filterAll()"><button class="btn" onclick="expandAll()">정리 펼치기</button><button class="btn" onclick="collapseAll()">정리 접기</button></div>
+
+  <section class="grid">
+    <aside class="side panel"><div class="nav" id="nav"></div></aside>
+    <div>
+      <section class="section" id="terms"><h2>핵심 단어 정리</h2><div class="cards" id="termCards"></div></section>
+      <section class="section" id="quiz"><h2>예상문제</h2><div id="quizBox" class="quiz"></div></section>
+      <p class="footer">사용법: 문제를 풀고 ‘정답 모두 보기’를 누르거나, 각 문제를 클릭하면 개별 정답을 확인할 수 있습니다.</p>
+    </div>
+  </section>
+</main>
+<script>
+const sections = [
+ {name:'조직·기관', items:[
+  ['Tissue','비슷한 세포들이 모여 특정 기능을 수행하는 통합된 집단.'],['Anatomy','생물체 각 부분의 구조를 연구하는 학문.'],['Physiology','생물체 각 부분의 기능을 연구하는 학문.'],['Epithelial tissue','몸의 표면을 덮고 기관의 안쪽을 둘러싸는 조직.'],['Connective tissue','다른 조직을 지지하고 연결하는 조직.'],['Muscle tissue','신경 신호에 의해 수축하는 근섬유로 구성된 조직.'],['Nervous tissue','정보 전달과 몸의 기능 조절을 담당하는 조직.'],['Neuron','신경 조직의 기본 단위인 신경 세포.'],['Organ','두 종류 이상의 조직이 하나의 기능 단위로 묶인 구조.'],['Organ system','여러 기관이 함께 작동하여 중요한 신체 기능을 수행하는 체계.']
+ ]},
+ {name:'환경 교환', items:[
+  ['Open system','주변 환경과 물질 및 에너지를 지속적으로 교환하는 체계.'],['Interstitial fluid','세포 사이 공간을 채우며 영양분과 노폐물 교환에 관여하는 체액.'],['Surface area','복잡한 동물에서 접히거나 가지친 내부 표면이 증가시키는 교환 면적.'],['External environment','소화계, 호흡계, 비뇨계가 물질을 교환하는 몸 바깥 환경.']
+ ]},
+ {name:'항상성', items:[
+  ['Homeostasis','외부 환경이 변해도 내부 환경을 비교적 일정하게 유지하려는 경향.'],['Negative feedback','과정의 결과가 그 과정을 억제하여 원래 상태로 되돌리는 조절 방식.'],['Positive feedback','과정의 결과가 같은 과정을 더 강화하는 조절 방식.'],['Set point','조절계가 유지하려는 기준값. 예: 사람의 체온 약 37°C.']
+ ]},
+ {name:'체온 조절', items:[
+  ['Thermoregulation','체온을 조절하는 항상성 기작.'],['Endotherms','대사 과정에서 발생한 열로 체온을 주로 유지하는 동물.'],['Ectotherms','주변 환경에서 열을 흡수하여 체온을 주로 얻는 동물.'],['Fever','감염과 싸우는 과정에서 나타나는 비정상적으로 높은 내부 체온.'],['Insulation','털, 깃털, 지방층처럼 열 손실을 줄이는 적응.'],['Shivering','골격근 수축의 대사 부산물로 열을 생성하는 반응.'],['Panting and sweating','증발을 증가시켜 냉각을 촉진하는 생리적 반응.']
+ ]},
+ {name:'삼투·비뇨계', items:[
+  ['Osmoregulation','물과 용질의 획득 및 손실을 조절하는 과정.'],['Osmosis','선택적 투과성 막을 사이에 두고 물이 이동하는 현상.'],['Urinary system','수분 균형 조절과 노폐물 배설에 중심 역할을 하는 기관계.'],['Urea','단백질과 핵산 분해로 생기는 질소 함유 노폐물.'],['Filtrate','혈장이 콩팥 세관으로 여과되어 만들어진 액체.'],['Nephron','콩팥의 기능을 수행하는 기본 단위.'],['Filtration','혈액에서 물과 작은 분자가 콩팥 세관으로 밀려 나와 여과액을 만드는 과정.'],['Reabsorption','여과액에서 물과 유용한 용질을 다시 혈액으로 회수하는 과정.'],['Secretion','이온이나 약물 같은 물질을 혈액에서 여과액으로 이동시키는 과정.'],['Excretion','소변을 콩팥에서 몸 밖으로 배출하는 과정.']
+ ]}
+];
+const questions = [
+ ['An integrated group of similar cells that performs a specific function is called a ', 'Tissue'],['The study of the structure of an organism\'s parts is called ', 'Anatomy'],['The study of the function of an organism\'s parts is called ', 'Physiology'],['Tissue that covers body surfaces and lines organs is called ', 'Epithelial tissue'],['Tissue whose major functions are supporting and joining other tissues is called ', 'Connective tissue'],['The basic functional unit of nervous tissue is the ', 'Neuron'],['A structure consisting of two or more tissues that work together to perform a specific function is called an ', 'Organ'],['A team of organs working together to perform vital body functions is called an ', 'Organ system'],['The fluid that fills spaces between cells is called ', 'Interstitial fluid'],['The tendency to maintain relatively constant internal conditions despite external changes is called ', 'Homeostasis'],['A regulatory mechanism in which the result inhibits the original process is called ', 'Negative feedback'],['A regulatory mechanism in which the result intensifies the original process is called ', 'Positive feedback'],['The homeostatic control of body temperature is called ', 'Thermoregulation'],['Animals that generate most of their body heat from metabolism are called ', 'Endotherms'],['Animals that obtain most of their body heat from the environment are called ', 'Ectotherms'],['An abnormally high internal body temperature that often accompanies infection is called a ', 'Fever'],['The control of water and dissolved solutes in the body is called ', 'Osmoregulation'],['The diffusion of water across a selectively permeable membrane is called ', 'Osmosis'],['The system responsible for regulating water balance and excreting wastes is the ', 'Urinary system'],['The nitrogen-containing waste product produced from the breakdown of proteins and nucleic acids is called ', 'Urea'],['Fluid formed when blood plasma is filtered into kidney tubules is called ', 'Filtrate'],['The functional unit of the kidney is the ', 'Nephron'],['The process by which water and small molecules are forced out of blood into kidney tubules is called ', 'Filtration'],['The process that returns useful substances from filtrate back to the blood is called ', 'Reabsorption'],['The transport of substances from blood into filtrate is called ', 'Secretion'],['The elimination of urine from the body is called ', 'Excretion'],['Animals continuously exchanging matter and energy with their surroundings are considered an ', 'Open system'],['Folded or branched exchange surfaces increase ', 'Surface area'],['The principle stating that biological structures are adapted to their functions is “Structure fits ', 'Function'],['The extracellular material surrounding connective tissue cells is called extracellular ', 'Matrix'],['Hair, feathers, and fat layers used to reduce heat loss are examples of ', 'Insulation'],['Heat production through repeated skeletal muscle contraction is called ', 'Shivering'],['Cooling by evaporation through breathing or sweat is called ', 'Panting and sweating'],['The control system target value, such as 37°C body temperature, is called a ', 'Set point'],['A moderate one of these can discourage bacterial growth and speed internal defenses: ', 'Fever']
+];
+function render(){
+ const nav=document.getElementById('nav'); nav.innerHTML=''; sections.forEach((s,i)=>{let b=document.createElement('button'); b.textContent=s.name; b.onclick=()=>document.getElementById('sec'+i).scrollIntoView({behavior:'smooth'}); nav.appendChild(b);});
+ const cards=document.getElementById('termCards'); cards.innerHTML=''; sections.forEach((s,i)=>{let h=document.createElement('div'); h.id='sec'+i; h.innerHTML=`<h3>${s.name}</h3>`; cards.appendChild(h); s.items.forEach(([term,def])=>{let d=document.createElement('details'); d.className='term searchable'; d.dataset.text=(term+' '+def+' '+s.name).toLowerCase(); d.innerHTML=`<summary>${term}<span class="tag">${s.name}</span></summary><div class="body">${def}</div>`; cards.appendChild(d);});});
+ const qb=document.getElementById('quizBox'); qb.innerHTML=''; questions.forEach(([q,a])=>{let div=document.createElement('div'); div.className='q searchable'; div.dataset.text=(q+' '+a).toLowerCase(); div.onclick=()=>div.classList.toggle('show'); div.innerHTML=`${q}<span class="blank"></span>.<div class="answer">정답: ${a}</div>`; qb.appendChild(div);});
+}
+function showAnswers(){document.querySelectorAll('.q').forEach(x=>x.classList.add('show'))} function hideAnswers(){document.querySelectorAll('.q').forEach(x=>x.classList.remove('show'))}
+function expandAll(){document.querySelectorAll('details').forEach(x=>x.open=true)} function collapseAll(){document.querySelectorAll('details').forEach(x=>x.open=false)}
+function filterAll(){let q=document.getElementById('search').value.toLowerCase().trim(); document.querySelectorAll('.searchable').forEach(el=>el.classList.toggle('hidden', q && !el.dataset.text.includes(q)))}
+render();
+</script>
+</body>
+</html>
