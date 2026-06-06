@@ -15,8 +15,11 @@
 
 
 .pdf-panel{margin:0 0 22px}.pdf-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}.pdf-actions{display:flex;gap:10px;flex-wrap:wrap}.pdf-actions a{text-decoration:none;color:var(--text)}.pdf-frame{width:100%;height:880px;border:1px solid var(--line);border-radius:20px;background:#f3f4f6}.pdf-fallback{font-size:13px;color:var(--muted);margin-top:8px}@media(max-width:860px){.pdf-frame{height:620px}}@media print{.pdf-panel{display:none}}
-.checkbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0 18px}.score{border:1px solid var(--line);border-radius:999px;background:#fbfdff;padding:9px 13px;color:#475467;font-weight:800}.answer-input{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}.answer-input input{min-width:220px;flex:1;border:1px solid var(--line);border-radius:14px;padding:11px 12px;font-size:15px}.answer-input button{border:1px solid var(--line);border-radius:14px;background:white;padding:10px 12px;font-weight:800;cursor:pointer}.answer-input button:hover{background:#f8fafc}.feedback{font-weight:900;margin-left:4px}.feedback.correct{color:var(--green)}.feedback.wrong{color:#dc2626}.q.correct{border-color:#86efac;background:#f0fdf4}.q.wrong{border-color:#fecaca;background:#fef2f2}.q-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.fav-btn{border:1px solid var(--line);border-radius:999px;background:white;padding:6px 10px;font-size:18px;line-height:1;cursor:pointer;color:#9ca3af}.fav-btn:hover{background:#fffbeb;border-color:#fde68a}.fav-btn.active{color:#f59e0b;background:#fffbeb;border-color:#fbbf24}.fav-empty{display:none;border:1px dashed #fbbf24;border-radius:18px;background:#fffbeb;padding:16px 18px;color:#92400e;font-weight:800;margin-bottom:10px}.fav-mode .fav-empty.show{display:block}
+.checkbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0 18px}.score{border:1px solid var(--line);border-radius:999px;background:#fbfdff;padding:9px 13px;color:#475467;font-weight:800}.answer-input{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}.answer-input input{min-width:220px;flex:1;border:1px solid var(--line);border-radius:14px;padding:11px 12px;font-size:15px}.answer-input button{border:1px solid var(--line);border-radius:14px;background:white;padding:10px 12px;font-weight:800;cursor:pointer}.answer-input button:hover{background:#f8fafc}.feedback{font-weight:900;margin-left:4px}.feedback.correct{color:var(--green)}.feedback.wrong{color:#dc2626}.q.correct{border-color:#86efac;background:#f0fdf4}.q.wrong{border-color:#fecaca;background:#fef2f2}
 @media print{.checkbar,.answer-input,.feedback{display:none!important}}
+
+.favorite-home{margin:18px 0 8px;border:1px solid #facc15;background:linear-gradient(180deg,#fffbeb,#fff);border-radius:24px;box-shadow:var(--shadow);padding:22px;cursor:pointer;display:flex;justify-content:space-between;gap:14px;align-items:center}.favorite-home:hover{border-color:#eab308;transform:translateY(-1px)}.star-btn{border:1px solid var(--line);background:white;border-radius:999px;width:38px;height:38px;font-size:20px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex:none}.star-btn.active{background:#fef3c7;border-color:#f59e0b;color:#d97706}.q-head{display:flex;gap:10px;align-items:flex-start}.q-main{flex:1}.chapter-badge{display:inline-block;margin:0 0 8px;border:1px solid var(--line);border-radius:999px;padding:4px 9px;font-size:12px;color:var(--muted);background:#fbfdff}.fav-empty{border:1px dashed var(--line);border-radius:18px;background:#fff;padding:24px;text-align:center;color:var(--muted)}.toggle-on{background:#fef3c7!important;border-color:#f59e0b!important;color:#92400e!important}
+@media print{.star-btn,.favorite-home{display:none!important}}
 
 </style>
 </head>
@@ -27,6 +30,13 @@
     <div class="home-hero">
       <h1 class="home-title">Chapter 선택</h1>
       <p class="muted">공부할 챕터를 누르면 해당 챕터의 핵심 단어 정리와 족보형 예상문제가 열립니다.</p>
+      <div class="favorite-home" onclick="openFavorites()">
+        <div>
+          <h2 style="margin:0 0 6px">⭐ 즐겨찾기 모음</h2>
+          <p class="muted" style="margin:0">헷갈리는 문제만 따로 모아서 봅니다.</p>
+        </div>
+        <span class="mini" id="favHomeCount">0문제</span>
+      </div>
     </div>
     <div class="home-grid" id="chapterCards"></div>
   </section>
@@ -61,6 +71,7 @@
       <button class="btn" onclick="hideAnswers()">정답 숨기기</button>
       <button class="btn" onclick="expandAll()">정리 펼치기</button>
       <button class="btn" onclick="collapseAll()">정리 접기</button>
+      <button class="btn" id="favOnlyBtn" onclick="toggleFavoritesOnly()">⭐ 즐겨찾기만 보기</button>
       <button class="btn" onclick="window.print()">문제지 인쇄</button>
     </div>
 
@@ -76,7 +87,6 @@
           <div class="checkbar">
             <button class="btn primary" onclick="gradeAll()">전체 채점</button>
             <button class="btn" onclick="resetQuizInputs()">입력 초기화</button>
-            <button class="btn" id="favFilterBtn" onclick="toggleFavoriteFilter()">즐겨찾기만 보기</button>
             <span class="score" id="scoreBox">점수: -</span>
           </div>
           <div id="quizBox" class="quiz"></div>
@@ -3236,7 +3246,6 @@ const pdfMap={
 };
 
 let current=null;
-let favOnly=false;
 function escapeRegExp(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
 function blankDefinition(term, def){
   const blank='<span class="blank"></span>';
@@ -3262,9 +3271,28 @@ function chapterQuestionList(data){
   }));
   return out;
 }
+function getFavoriteStore(){
+  try{return JSON.parse(localStorage.getItem('bioQuizFavorites')||'{}')}catch(e){return {}}
+}
+function setFavoriteStore(store){localStorage.setItem('bioQuizFavorites', JSON.stringify(store||{}))}
+function favoriteCount(){return Object.keys(getFavoriteStore()).length}
+function updateFavoriteCounts(){
+  const el=document.getElementById('favHomeCount');
+  if(el) el.textContent=favoriteCount()+'문제';
+}
+function makeQuestionKey(ch, idx, answer){return ch+'::'+idx+'::'+normalizeAnswer(answer)}
+function allQuestionObjects(){
+  const out=[];
+  Object.entries(chapters).forEach(([ch,data])=>{
+    const qs=(ch==='21'?data.questions.map(([sentence,answer])=>questionFromSentence(sentence,answer)):chapterQuestionList(data));
+    qs.forEach((item,idx)=>out.push({...item, chapter:ch, chapterTitle:data.title, key:makeQuestionKey(ch,idx,item.a), index:idx}));
+  });
+  return out;
+}
 function renderHome(){
   const box=document.getElementById('chapterCards');
   box.innerHTML='';
+  updateFavoriteCounts();
   Object.entries(chapters).forEach(([id,data])=>{
     const terms=data.sections.reduce((a,s)=>a+s.items.length,0);
     const qs=(id==='21'?data.questions.length:chapterQuestionList(data).length);
@@ -3275,12 +3303,23 @@ function renderHome(){
     box.appendChild(card);
   });
 }
+let favoritesOnly=false;
 function openChapter(ch){
   current=ch;
+  favoritesOnly=false;
   document.getElementById('home').style.display='none';
   document.getElementById('study').classList.add('active');
   document.getElementById('search').value='';
   renderStudy();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function openFavorites(){
+  current='favorites';
+  favoritesOnly=false;
+  document.getElementById('home').style.display='none';
+  document.getElementById('study').classList.add('active');
+  document.getElementById('search').value='';
+  renderFavoritesPage();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function goHome(){
@@ -3288,14 +3327,48 @@ function goHome(){
   document.getElementById('home').style.display='block';
   current=null;
   document.title='생명과학개론 Chapter 선택';
+  updateFavoriteCounts();
   window.scrollTo({top:0,behavior:'smooth'});
+}
+function renderQuestionCard(qb, item, idx){
+  const favs=getFavoriteStore();
+  const isFav=!!favs[item.key];
+  const div=document.createElement('div');
+  div.className='q searchable';
+  if(isFav) div.classList.add('favorited');
+  div.dataset.text=item.text;
+  div.dataset.answer=item.a;
+  div.dataset.key=item.key;
+  div.dataset.fav=isFav?'1':'0';
+  div.onclick=(e)=>{
+    if(e.target.closest('input') || e.target.closest('button')) return;
+    div.classList.toggle('show');
+  };
+  const badge=item.chapterTitle?`<span class="chapter-badge">${item.chapterTitle}</span><br>`:'';
+  div.innerHTML=`<div class="q-head">
+      <button type="button" class="star-btn ${isFav?'active':''}" title="즐겨찾기" onclick="toggleFavorite('${item.key.replace(/'/g,"\'")}', this)">${isFav?'★':'☆'}</button>
+      <div class="q-main">${badge}<span class="definition">${item.q}</span>
+        <div class="answer-input">
+          <input type="text" autocomplete="off" placeholder="정답 입력" onkeydown="if(event.key==='Enter'){checkOne(this.closest('.q'))}">
+          <button type="button" onclick="checkOne(this.closest('.q'))">채점</button>
+          <span class="feedback"></span>
+        </div>
+        <div class="answer">Answer: <span class="answer-term">${item.a}</span></div>
+      </div>
+    </div>`;
+  qb.appendChild(div);
 }
 function renderStudy(){
   const data=chapters[current];
-  const qs=(current==='21'?data.questions.map(([sentence,answer])=>questionFromSentence(sentence,answer)):chapterQuestionList(data));
+  const qs=(current==='21'?data.questions.map(([sentence,answer])=>questionFromSentence(sentence,answer)):chapterQuestionList(data))
+    .map((item,idx)=>({...item, key:makeQuestionKey(current,idx,item.a), index:idx}));
   document.title='생명과학개론 '+data.title;
   document.getElementById('studyTitle').textContent=data.title;
   document.getElementById('studyDesc').textContent=data.desc;
+  document.getElementById('pdfPanel').style.display='block';
+  document.getElementById('summary').style.display='block';
+  const favBtn=document.getElementById('favOnlyBtn');
+  if(favBtn){favBtn.style.display='inline-block';favBtn.classList.remove('toggle-on');favBtn.textContent='⭐ 즐겨찾기만 보기'}
   const pdf=pdfMap[current];
   document.getElementById('pdfViewer').src=pdf.src;
   document.getElementById('pdfOpen').href=pdf.src;
@@ -3316,32 +3389,55 @@ function renderStudy(){
   });
   const scoreBox=document.getElementById('scoreBox');
   if(scoreBox) scoreBox.textContent='점수: -';
-  favOnly=false;
-  const favBtn=document.getElementById('favFilterBtn');
-  if(favBtn) favBtn.textContent='즐겨찾기만 보기';
-  document.getElementById('quiz')?.classList.remove('fav-mode');
   const qb=document.getElementById('quizBox');qb.innerHTML='';
-  qs.forEach(({q,a,text},idx)=>{
-    const div=document.createElement('div');div.className='q searchable';div.dataset.text=text;div.dataset.answer=a;
-    div.onclick=(e)=>{
-      if(e.target.closest('input') || e.target.closest('button')) return;
-      div.classList.toggle('show');
-    };
-    div.dataset.fav='0';
-    div.innerHTML=`<div class="q-head"><span class="definition">${q}</span><button type="button" class="fav-btn" title="즐겨찾기" aria-label="즐겨찾기" onclick="toggleFavorite(this.closest('.q'), this)">☆</button></div>
-      <div class="answer-input">
-        <input type="text" autocomplete="off" placeholder="정답 입력" onkeydown="if(event.key==='Enter'){checkOne(this.closest('.q'))}">
-        <button type="button" onclick="checkOne(this.closest('.q'))">채점</button>
-        <span class="feedback"></span>
-      </div>
-      <div class="answer">Answer: <span class="answer-term">${a}</span></div>`;
-    qb.appendChild(div);
+  qs.forEach((item,idx)=>renderQuestionCard(qb,item,idx));
+  filterAll();
+}
+function renderFavoritesPage(){
+  const favs=getFavoriteStore();
+  const qs=allQuestionObjects().filter(x=>favs[x.key]);
+  document.title='생명과학개론 즐겨찾기 모음';
+  document.getElementById('studyTitle').textContent='⭐ 즐겨찾기 모음';
+  document.getElementById('studyDesc').textContent='별표한 문제만 챕터와 상관없이 모아봅니다. 별을 다시 누르면 목록에서 빠집니다.';
+  document.getElementById('pdfPanel').style.display='none';
+  document.getElementById('summary').style.display='none';
+  const favBtn=document.getElementById('favOnlyBtn');
+  if(favBtn) favBtn.style.display='none';
+  document.getElementById('examTitle').textContent='즐겨찾기 예상문제';
+  document.getElementById('sourceText').textContent='즐겨찾기 문제는 이 브라우저의 localStorage에 저장됩니다.';
+  const nav=document.getElementById('nav');nav.innerHTML='';
+  Object.keys(chapters).forEach(ch=>{
+    const count=qs.filter(q=>q.chapter===ch).length;
+    if(count){const b=document.createElement('button');b.textContent=`Chapter ${ch} (${count})`;b.onclick=()=>{const el=document.querySelector(`[data-chapter="${ch}"]`); if(el) el.scrollIntoView({behavior:'smooth',block:'start'})}; nav.appendChild(b)}
   });
-  const empty=document.createElement('div');
-  empty.id='favEmpty';
-  empty.className='fav-empty';
-  empty.textContent='즐겨찾기한 문제가 없습니다.';
-  qb.prepend(empty);
+  const scoreBox=document.getElementById('scoreBox'); if(scoreBox) scoreBox.textContent='점수: -';
+  const qb=document.getElementById('quizBox');qb.innerHTML='';
+  if(!qs.length){qb.innerHTML='<div class="fav-empty">아직 즐겨찾기한 문제가 없습니다. 각 챕터 문제의 ☆ 버튼을 눌러 추가하면 됩니다.</div>';return}
+  qs.forEach((item,idx)=>{
+    const marker=document.createElement('div'); marker.dataset.chapter=item.chapter; marker.style.display='none'; qb.appendChild(marker);
+    renderQuestionCard(qb,item,idx);
+  });
+  filterAll();
+}
+function toggleFavorite(key, btn){
+  const favs=getFavoriteStore();
+  const on=!favs[key];
+  if(on) favs[key]=true; else delete favs[key];
+  setFavoriteStore(favs);
+  document.querySelectorAll(`.q[data-key="${CSS.escape(key)}"]`).forEach(q=>{
+    q.dataset.fav=on?'1':'0';
+    q.classList.toggle('favorited',on);
+    const b=q.querySelector('.star-btn'); if(b){b.classList.toggle('active',on); b.textContent=on?'★':'☆'}
+  });
+  updateFavoriteCounts();
+  if(current==='favorites' && !on) renderFavoritesPage();
+  else filterAll();
+}
+function toggleFavoritesOnly(){
+  favoritesOnly=!favoritesOnly;
+  const btn=document.getElementById('favOnlyBtn');
+  if(btn){btn.classList.toggle('toggle-on',favoritesOnly);btn.textContent=favoritesOnly?'전체 문제 보기':'⭐ 즐겨찾기만 보기'}
+  filterAll();
 }
 function normalizeAnswer(s){return (s||'').toString().trim().toLowerCase().replace(/[\s\-–—_]+/g,' ').replace(/[()]/g,'').trim()}
 function isCorrect(user, answer){return normalizeAnswer(user)===normalizeAnswer(answer)}
@@ -3374,39 +3470,18 @@ function resetQuizInputs(){
   });
   const box=document.getElementById('scoreBox'); if(box) box.textContent='점수: -';
 }
-
-function toggleFavorite(qel, btn){
-  if(!qel || !btn) return;
-  const on=qel.dataset.fav!=='1';
-  qel.dataset.fav=on?'1':'0';
-  btn.classList.toggle('active', on);
-  btn.textContent=on?'★':'☆';
-  applyFilters();
-}
-function toggleFavoriteFilter(){
-  favOnly=!favOnly;
-  const btn=document.getElementById('favFilterBtn');
-  if(btn) btn.textContent=favOnly?'전체 문제 보기':'즐겨찾기만 보기';
-  document.getElementById('quiz')?.classList.toggle('fav-mode', favOnly);
-  applyFilters();
-}
-function applyFilters(){
-  const q=document.getElementById('search').value.toLowerCase().trim();
-  let visibleFav=0;
-  document.querySelectorAll('.searchable').forEach(el=>{
-    const matchesSearch=!q || el.dataset.text.includes(q);
-    const matchesFav=!favOnly || !el.classList.contains('q') || el.dataset.fav==='1';
-    el.classList.toggle('hidden', !(matchesSearch && matchesFav));
-    if(el.classList.contains('q') && !el.classList.contains('hidden') && el.dataset.fav==='1') visibleFav++;
-  });
-  const empty=document.getElementById('favEmpty');
-  if(empty) empty.classList.toggle('show', favOnly && visibleFav===0);
-}
 function showAnswers(){document.querySelectorAll('.q').forEach(x=>x.classList.add('show'))}
 function hideAnswers(){document.querySelectorAll('.q').forEach(x=>x.classList.remove('show'))}
 function expandAll(){document.querySelectorAll('details').forEach(x=>x.open=true)}
 function collapseAll(){document.querySelectorAll('details').forEach(x=>x.open=false)}
-function filterAll(){applyFilters()}
+function filterAll(){
+  let q=document.getElementById('search').value.toLowerCase().trim();
+  document.querySelectorAll('.searchable').forEach(el=>{
+    const searchHidden=!!(q && !el.dataset.text.includes(q));
+    const favHidden=!!(favoritesOnly && el.classList.contains('q') && el.dataset.fav!=='1');
+    el.classList.toggle('hidden', searchHidden || favHidden);
+  });
+}
 renderHome();
 </script>
 </body>
